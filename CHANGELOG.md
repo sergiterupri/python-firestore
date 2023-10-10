@@ -5,6 +5,18 @@
 [1]: https://pypi.org/project/google-cloud-firestore/#history
 
 
+## [2.12.1](https://github.com/googleapis/python-firestore/compare/v2.12.0...v2.12.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* Ensure transactions rollback on failure ([#767](https://github.com/googleapis/python-firestore/issues/767)) ([cdaf25b](https://github.com/googleapis/python-firestore/commit/cdaf25b35d27355e4ea577843004fdc2d16bb4ac))
+
+
+### Documentation
+
+* Minor formatting ([41b5ea0](https://github.com/googleapis/python-firestore/commit/41b5ea091245bea291c8de841205ecb53a26087f))
+
 ## [2.12.0](https://github.com/googleapis/python-firestore/compare/v2.11.1...v2.12.0) (2023-08-07)
 
 
