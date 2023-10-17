@@ -17,7 +17,7 @@
 from google.api_core import retry as retries
 
 from google.cloud.firestore_v1 import types
-from typing import Any, Coroutine, NoReturn, Optional, Union
+from typing import Any, Coroutine, List, NoReturn, Optional, Union
 
 
 MAX_ATTEMPTS = 5
@@ -119,7 +119,7 @@ class BaseTransaction(object):
 
         This intended to occur on success or failure of the associated RPCs.
         """
-        self._write_pbs = []
+        self._write_pbs: List[Any] = []
         self._id = None
 
     def _begin(self, retry_id=None) -> NoReturn:
