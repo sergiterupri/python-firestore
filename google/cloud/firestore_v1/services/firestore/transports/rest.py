@@ -26,7 +26,7 @@ from google.api_core import rest_streaming
 from google.api_core import path_template
 from google.api_core import gapic_v1
 
-from google.protobuf import json_format
+from google.protobuf import json_format # type: ignore
 from google.cloud.location import locations_pb2  # type: ignore
 from requests import __version__ as requests_version
 import dataclasses

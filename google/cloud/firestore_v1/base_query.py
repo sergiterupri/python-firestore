@@ -26,7 +26,7 @@ import math
 import warnings
 
 from google.api_core import retry as retries
-from google.protobuf import wrappers_pb2
+from google.protobuf import wrappers_pb2 # type: ignore
 
 from google.cloud import firestore_v1
 from google.cloud.firestore_v1 import _helpers
