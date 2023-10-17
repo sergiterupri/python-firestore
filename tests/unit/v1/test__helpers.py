@@ -2374,6 +2374,7 @@ def test_metadata_with_prefix():
 
 def test_writeoption_is_abstract():
     from google.cloud.firestore_v1._helpers import WriteOption
+
     with pytest.raises(TypeError):
         WriteOption()
 
