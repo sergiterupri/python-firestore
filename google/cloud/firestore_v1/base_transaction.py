@@ -19,17 +19,6 @@ from google.api_core import retry as retries
 from google.cloud.firestore_v1 import types
 from typing import Any, Coroutine, NoReturn, Optional, Union
 
-_CANT_BEGIN: str
-_CANT_COMMIT: str
-_CANT_RETRY_READ_ONLY: str
-_CANT_ROLLBACK: str
-_EXCEED_ATTEMPTS_TEMPLATE: str
-_INITIAL_SLEEP: float
-_MAX_SLEEP: float
-_MISSING_ID_TEMPLATE: str
-_MULTIPLIER: float
-_WRITE_READ_ONLY: str
-
 
 MAX_ATTEMPTS = 5
 """int: Default number of transaction attempts (with retries)."""
