@@ -1227,12 +1227,11 @@ def deserialize_bundle(
         raise ValueError("Unexpected end to serialized FirestoreBundle")
 
     # Now, finally add the metadata element
-    if bundle and metadata_bundle_element:
-        bundle._add_bundle_element(
-            metadata_bundle_element,
-            client=client,
-            type="metadata",  # type: ignore
-        )
+    bundle._add_bundle_element( # type: ignore
+        metadata_bundle_element, # type: ignore
+        client=client, # type: ignore
+        type="metadata",  # type: ignore
+    )
 
     return bundle
 

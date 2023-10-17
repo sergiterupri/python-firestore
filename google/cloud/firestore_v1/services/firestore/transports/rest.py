@@ -28,7 +28,7 @@ from google.api_core import gapic_v1
 
 from google.protobuf import json_format  # type: ignore
 from google.cloud.location import locations_pb2  # type: ignore
-from requests import __version__ as requests_version
+from requests import __version__ as requests_version  # type: ignore
 import dataclasses
 import re
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
