@@ -134,16 +134,16 @@ class BaseTransaction(object):
     def get_all(
         self,
         references: list,
-        retry: retries.Retry = None,
-        timeout: float = None,
+        retry: Optional[retries.Retry] = None,
+        timeout: Optional[float] = None,
     ) -> NoReturn:
         raise NotImplementedError
 
     def get(
         self,
         ref_or_query,
-        retry: retries.Retry = None,
-        timeout: float = None,
+        retry: Optional[retries.Retry] = None,
+        timeout: Optional[float] = None,
     ) -> NoReturn:
         raise NotImplementedError
 
