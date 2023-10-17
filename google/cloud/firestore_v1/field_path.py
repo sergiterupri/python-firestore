@@ -55,7 +55,8 @@ def _tokenize_field_path(path: str):
     get_token = TOKENS_REGEX.match
     match = get_token(path)
     while match is not None:
-        type_: str = match.lastgroup
+        type_ = match.lastgroup
+        assert type_ is not None, "Expected a named group match"
         value = match.group(type_)
         yield value
         pos = match.end()
