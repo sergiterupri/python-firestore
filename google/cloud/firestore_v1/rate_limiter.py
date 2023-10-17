@@ -148,6 +148,7 @@ class RateLimiter:
         self._maximum_tokens = round(self._maximum_tokens * 1.5)
         if self._global_max_tokens is not None:
             self._maximum_tokens = min(self._maximum_tokens, self._global_max_tokens)
+        return
 
     def _refill(self) -> NoReturn:
         """Replenishes any tokens that should have regenerated since the last
