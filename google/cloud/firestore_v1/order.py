@@ -121,10 +121,8 @@ class Order(object):
 
     @staticmethod
     def compare_geo_points(left, right) -> Any:
-        left_value = decode_value(left, None)
-        right_value = decode_value(right, None)
-        if left_value is not GeoPoint or right_value is not GeoPoint:
-            raise ValueError("Protobuf value was not GeoPoint")
+        left_value: GeoPoint = decode_value(left, None)
+        right_value: GeoPoint = decode_value(right, None)
         cmp = (left_value.latitude > right_value.latitude) - (
             left_value.latitude < right_value.latitude
         )

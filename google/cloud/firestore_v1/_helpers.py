@@ -15,6 +15,7 @@
 """Common helpers shared across Google Cloud Firestore modules."""
 
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 import datetime
 import json
 
@@ -69,18 +70,15 @@ _GRPC_ERROR_MAPPING = {
     grpc.StatusCode.NOT_FOUND: exceptions.NotFound,
 }
 
-
-class GeoPoint(object):
+@dataclass
+class GeoPoint:
     """Simple container for a geo point value.
-
     Args:
         latitude (float): Latitude of a point.
         longitude (float): Longitude of a point.
     """
-
-    def __init__(self, latitude, longitude) -> None:
-        self.latitude = latitude
-        self.longitude = longitude
+    latitude: float
+    longitude: float
 
     def to_protobuf(self) -> latlng_pb2.LatLng:
         """Convert the current object to protobuf.
