@@ -14,6 +14,7 @@
 
 """Common helpers shared across Google Cloud Firestore modules."""
 
+from abc import ABC, abstractmethod
 import datetime
 import json
 
@@ -495,7 +496,7 @@ class DocumentExtractor(object):
         self.increments = {}
         self.minimums = {}
         self.maximums = {}
-        self.set_fields = {}
+        self.set_fields: Dict[Any, Any] = {}
         self.empty_document = False
 
         prefix_path = FieldPath()
@@ -557,7 +558,7 @@ class DocumentExtractor(object):
             + list(self.minimums)
         )
 
-    def _get_update_mask(self, allow_empty_mask=False) -> None:
+    def _get_update_mask(self, allow_empty_mask=False):
         return None
 
     def get_update_pb(
@@ -721,9 +722,9 @@ class DocumentExtractorForMerge(DocumentExtractor):
 
     def __init__(self, document_data) -> None:
         super(DocumentExtractorForMerge, self).__init__(document_data)
-        self.data_merge = []
-        self.transform_merge = []
-        self.merge = []
+        self.data_merge: List[Any] = []
+        self.transform_merge: List[Any] = []
+        self.merge: List[Any] = []
 
     def _apply_merge_all(self) -> None:
         self.data_merge = sorted(self.field_paths + self.deleted_fields)
@@ -777,7 +778,7 @@ class DocumentExtractorForMerge(DocumentExtractor):
                     self.data_merge.append(field_path)
 
         # Clear out data for fields not merged.
-        merged_set_fields = {}
+        merged_set_fields: Dict[str, Any] = {}
         for field_path in self.data_merge:
             value = get_field_value(self.document_data, field_path)
             set_field_value(merged_set_fields, field_path, value)
@@ -1007,10 +1008,11 @@ def metadata_with_prefix(prefix: str, **kw) -> List[Tuple[str, str]]:
     return [("google-cloud-resource-prefix", prefix)]
 
 
-class WriteOption(object):
+class WriteOption(ABC, object):
     """Option used to assert a condition on a write operation."""
 
-    def modify_write(self, write, no_create_msg=None) -> NoReturn:
+    @abstractmethod
+    def modify_write(self, write, **unused_kwargs) -> None:
         """Modify a ``Write`` protobuf based on the state of this write option.
 
         This is a virtual method intended to be implemented by subclasses.
@@ -1142,7 +1144,7 @@ def compare_timestamps(
 def deserialize_bundle(
     serialized: Union[str, bytes],
     client: "google.cloud.firestore_v1.client.BaseClient",  # type: ignore
-) -> "google.cloud.firestore_bundle.FirestoreBundle":  # type: ignore
+) -> Optional["google.cloud.firestore_bundle.FirestoreBundle"]:  # type: ignore
     """Inverse operation to a `FirestoreBundle` instance's `build()` method.
 
     Args:
@@ -1226,11 +1228,12 @@ def deserialize_bundle(
         raise ValueError("Unexpected end to serialized FirestoreBundle")
 
     # Now, finally add the metadata element
-    bundle._add_bundle_element(
-        metadata_bundle_element,
-        client=client,
-        type="metadata",  # type: ignore
-    )
+    if bundle is not None and metadata_bundle_element is not None:
+        bundle._add_bundle_element(
+            metadata_bundle_element,
+            client=client,
+            type="metadata",  # type: ignore
+        )
 
     return bundle
 
@@ -1297,3 +1300,4 @@ def _get_document_from_bundle(
     bundled_doc = bundle.documents.get(document_id)
     if bundled_doc:
         return bundled_doc.snapshot
+    return None
