@@ -42,7 +42,6 @@ from typing import (
     Generator,
     Iterator,
     List,
-    NoReturn,
     Optional,
     Tuple,
     Union,
