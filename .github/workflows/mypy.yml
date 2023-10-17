@@ -16,8 +16,7 @@ jobs:
     - name: Install nox
       run: |
         python -m pip install --upgrade setuptools pip wheel
-        python -m pip install nox mypy
-        python -m mypy --install-types
+        python -m pip install nox
     - name: Run mypy
       run: |
         nox -s mypy
