@@ -2372,12 +2372,11 @@ def test_metadata_with_prefix():
     assert metadata == [("google-cloud-resource-prefix", database_string)]
 
 
-def test_writeoption_modify_write():
+def test_writeoption_is_abstract():
     from google.cloud.firestore_v1._helpers import WriteOption
 
-    option = WriteOption()
-    with pytest.raises(NotImplementedError):
-        option.modify_write(None)
+    with pytest.raises(TypeError):
+        WriteOption()
 
 
 def test_lastupdateoption_constructor():

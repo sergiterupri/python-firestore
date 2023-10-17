@@ -17,18 +17,7 @@
 from google.api_core import retry as retries
 
 from google.cloud.firestore_v1 import types
-from typing import Any, Coroutine, NoReturn, Optional, Union
-
-_CANT_BEGIN: str
-_CANT_COMMIT: str
-_CANT_RETRY_READ_ONLY: str
-_CANT_ROLLBACK: str
-_EXCEED_ATTEMPTS_TEMPLATE: str
-_INITIAL_SLEEP: float
-_MAX_SLEEP: float
-_MISSING_ID_TEMPLATE: str
-_MULTIPLIER: float
-_WRITE_READ_ONLY: str
+from typing import Any, Coroutine, List, NoReturn, Optional, Union
 
 
 MAX_ATTEMPTS = 5
@@ -130,7 +119,7 @@ class BaseTransaction(object):
 
         This intended to occur on success or failure of the associated RPCs.
         """
-        self._write_pbs = []
+        self._write_pbs: List[Any] = []
         self._id = None
 
     def _begin(self, retry_id=None) -> NoReturn:
@@ -145,16 +134,16 @@ class BaseTransaction(object):
     def get_all(
         self,
         references: list,
-        retry: retries.Retry = None,
-        timeout: float = None,
+        retry: Optional[retries.Retry] = None,
+        timeout: Optional[float] = None,
     ) -> NoReturn:
         raise NotImplementedError
 
     def get(
         self,
         ref_or_query,
-        retry: retries.Retry = None,
-        timeout: float = None,
+        retry: Optional[retries.Retry] = None,
+        timeout: Optional[float] = None,
     ) -> NoReturn:
         raise NotImplementedError
 

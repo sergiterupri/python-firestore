@@ -28,7 +28,7 @@ from google.cloud.firestore_v1.base_document import (
 from google.cloud.firestore_v1 import _helpers
 from google.cloud.firestore_v1.types import write
 from google.cloud.firestore_v1.watch import Watch
-from google.protobuf.timestamp_pb2 import Timestamp
+from google.protobuf.timestamp_pb2 import Timestamp  # type: ignore
 from typing import Any, Callable, Generator, Iterable
 
 

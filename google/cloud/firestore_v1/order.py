@@ -13,9 +13,9 @@
 # limitations under the License.
 
 from enum import Enum
-from google.cloud.firestore_v1._helpers import decode_value
+from google.cloud.firestore_v1._helpers import decode_value, GeoPoint
 import math
-from typing import Any
+from typing import Any, cast
 
 
 class TypeOrder(Enum):
@@ -121,8 +121,8 @@ class Order(object):
 
     @staticmethod
     def compare_geo_points(left, right) -> Any:
-        left_value = decode_value(left, None)
-        right_value = decode_value(right, None)
+        left_value = cast(GeoPoint, decode_value(left, None))
+        right_value = cast(GeoPoint, decode_value(right, None))
         cmp = (left_value.latitude > right_value.latitude) - (
             left_value.latitude < right_value.latitude
         )
