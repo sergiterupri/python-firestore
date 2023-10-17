@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from enum import Enum
-from google.cloud.firestore_v1._helpers import decode_value
+from google.cloud.firestore_v1._helpers import decode_value, GeoPoint
 import math
 from typing import Any
 
@@ -123,6 +123,8 @@ class Order(object):
     def compare_geo_points(left, right) -> Any:
         left_value = decode_value(left, None)
         right_value = decode_value(right, None)
+        if left_value is not GeoPoint or right_value is not GeoPoint:
+            raise ValueError("Protobuf value was not GeoPoint")
         cmp = (left_value.latitude > right_value.latitude) - (
             left_value.latitude < right_value.latitude
         )
