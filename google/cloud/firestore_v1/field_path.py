@@ -55,7 +55,9 @@ def _tokenize_field_path(path: str):
     get_token = TOKENS_REGEX.match
     match = get_token(path)
     while match is not None:
-        type_ = cast(str, match.lastgroup) # We can safely assume that because of the pattern
+        type_ = cast(
+            str, match.lastgroup
+        )  # We can safely assume that because of the pattern
         value = match.group(type_)
         yield value
         pos = match.end()
