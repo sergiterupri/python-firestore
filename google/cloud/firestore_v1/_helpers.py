@@ -70,6 +70,7 @@ _GRPC_ERROR_MAPPING = {
     grpc.StatusCode.NOT_FOUND: exceptions.NotFound,
 }
 
+
 @dataclass
 class GeoPoint:
     """Simple container for a geo point value.
@@ -77,6 +78,7 @@ class GeoPoint:
         latitude (float): Latitude of a point.
         longitude (float): Longitude of a point.
     """
+
     latitude: float
     longitude: float
 
