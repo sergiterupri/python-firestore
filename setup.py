@@ -50,7 +50,8 @@ with io.open(readme_filename, encoding="utf-8") as readme_file:
     readme = readme_file.read()
 
 # Only include packages under the 'google' namespace. Do not include tests,
-# benchmarks, etc. 
+# benchmarks, etc.
+
 packages = [
     package
     for package in setuptools.find_namespace_packages()
